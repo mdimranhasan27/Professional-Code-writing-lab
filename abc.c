@@ -1,42 +1,68 @@
 #include<stdio.h>
+
+#define STUDENTS 3
+#define SUBJECTS 3
+
+float calculateAverage(int marks[], int subjectCount) {
+    int sum = 0;
+    for (int i = 0; i < subjectCount; i++) {
+        sum += marks[i];
+    }
+    return sum / (float)subjectCount;
+}
+
+char getGrade(float average) {
+    if (average >= 80)
+        return 'A';
+    else if (average >= 60)
+        return 'B';
+    else if (average >= 40)
+        return 'C';
+    else
+        return 'F';
+}
+int findTopper(int marks[STUDENTS][SUBJECTS]) {
+    int topIndex = 0;
+    int maxTotal = 0;
+
+    for (int i = 0; i < STUDENTS; i++) {
+        int total = 0;
+        for (int j = 0; j < SUBJECTS; j++) {
+            total += marks[i][j];
+        }
+        if (total > maxTotal) {
+            maxTotal = total;
+            topIndex = i;
+        }
+    }
+    return topIndex;
+}
+
+
+
 int main()
 {
-	int marks[3][3]={ 			
+	int marks[STUDENTS][SUBJECTS]={ 			
 				{50,60,70},
 				{80,90,100},
 				{30,40,50} };
 
-	char name[3][10]={"Ali","Bob","Cat"};
-	int i,j,sum;
+	char name[STUDENTS][10]={"Ali","Bob","Cat"};
+	int i,j;
 	float average;
-	for(i=0;i<3;i++){
-		sum = 0;
-		for(j=0;j<3;j++){
-			sum+=marks[i][j];
-		}
-		average = sum/3.0;
-		if(average >= 80)
-				printf("%s Grade A average=%.2f\n",name[i],average);
-		else if(average>=60) 
-				printf("%s Grade B average=%.2f\n",name[i],average);
-		else if(average>=40) 
-				 printf("%s Grade C average=%.2f\n",name[i],average);
-		else 
-				 printf("%s Fail average=%.2f\n",name[i],average);
+	for(i=0;i<STUDENTS;i++){
+		average =  calculateAverage(marks[i], 3);
+		char grade = getGrade(average);
+		printf("%s Grade %c average=%.2f\n",name[i],grade , average);
 	}
 
-	int max=0,position=0;
-	for(i=0;i<3;i++){
-		sum=0;
-		for(j=0;j<3;j++){
-			 sum+=marks[i][j];
-	}
-	if(sum>max){
-			max=sum;
-			position=i;
-	}
-	}
-	printf("Topper: %s with total %d\n",name[position],max);
+	int topperIndex = findTopper(marks);
+    int topperTotal = 0;
+    for (int j = 0; j < SUBJECTS; j++)
+        topperTotal += marks[topperIndex][j];
+
+    printf("\nTopper: %s with total marks = %d\n", name[topperIndex], topperTotal);
+
 	return 0;
 }
 	
