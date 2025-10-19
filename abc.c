@@ -1,38 +1,42 @@
 #include<stdio.h>
 int main()
 {
-	int a[3][3]={
+	int marks[3][3]={ 			
 				{50,60,70},
 				{80,90,100},
 				{30,40,50} };
 
-	char n[3][10]={"Ali","Bob","Cat"};
-	int i,j,s;
-	float avg;
+	char name[3][10]={"Ali","Bob","Cat"};
+	int i,j,sum;
+	float average;
 	for(i=0;i<3;i++){
-		s=0;
+		sum = 0;
 		for(j=0;j<3;j++){
-			s+=a[i][j];
+			sum+=a[i][j];
 		}
-		avg=s/3.0;
-		if(avg>=80)
-		printf("%s Grade A avg=%.2f\n",n[i],avg);
-		else if(avg>=60)printf("%s Grade B avg=%.2f\n",n[i],avg);
-		else if(avg>=40)printf("%s Grade C avg=%.2f\n",n[i],avg);
-		else printf("%s Fail avg=%.2f\n",n[i],avg);
+		average = s/3.0;
+		if(average >= 80)
+				printf("%s Grade A average=%.2f\n",n[i],average);
+		else if(average>=60) 
+				printf("%s Grade B average=%.2f\n",n[i],average);
+		else if(average>=40) 
+				 printf("%s Grade C average=%.2f\n",n[i],average);
+		else 
+				 printf("%s Fail average=%.2f\n",n[i],average);
 	}
 
-	int max=0,pos=0;
+	int max=0,position=0;
 	for(i=0;i<3;i++){
-		s=0;
+		sum=0;
 		for(j=0;j<3;j++){
-			 s+=a[i][j];
+			 sum+=a[i][j];
 	}
-	if(s>max){
-			max=s;pos=i;
+	if(sum>max){
+			max=sum;
+			position=i;
 	}
 	}
-	printf("Topper: %s with total %d\n",n[pos],max);
+	printf("Topper: %s with total %d\n",n[position],max);
 	return 0;
 }
 	
